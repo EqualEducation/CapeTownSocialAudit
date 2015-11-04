@@ -31,7 +31,8 @@ if [ $env != "production" ]; then
 	echo "";
 else
 	echo "production";
-  host=production-db-a2.meteor.io:27017
+  host=production-db-a3.meteor.io:27017
+  # production-db-a3.meteor.io:2701
 	mongo_db=wc_audit_equaleducation_org_za
 	user="ee"
 	pass="ee"

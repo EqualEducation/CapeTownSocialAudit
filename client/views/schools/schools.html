@@ -3,6 +3,19 @@
     <h2>Manage Schools</h2>
     <a href="/upload" class="btn">Upload Schools</a>
     {{> manageSchools}}
+    <!-- Modal Structure -->
+      <div id="schoolDetails" class="modal">
+        <div class="modal-content">
+          {{#with currentSchool}}
+            {{print this.schoolDetails}}
+            <h4>{{this.schoolDetails.INSTITUTION_NAME}}</h4>
+            {{> schoolDetails this.schoolDetails}}
+          {{/with}}
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+      </div>
+  </div>
   </div>
 </template>
 

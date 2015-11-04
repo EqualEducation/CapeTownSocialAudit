@@ -9,7 +9,7 @@ Template.manageSchools.helpers({
           fields: [
             { key: 'schoolDetails.INSTITUTION_NAME', label: 'Name' },
             { key: 'schoolDetails.DISTRICT_NAME', label: 'District' },
-            // { key: 'edit', label: '', fn: function () { return new Spacebars.SafeString('<button type="button" class="editbtn">Edit</button>') } },
+            { key: 'edit', label: '', fn: function () { return new Spacebars.SafeString('<button type="button" class="editbtn">View</button>') } },
             { key: 'delete', label: '', fn: function () { return new Spacebars.SafeString('<button type="button" class="deletebtn">Delete</button>') } }
 
           ]
@@ -26,6 +26,16 @@ Template.schools.events({
     if (event.target.className == "deletebtn") {
       Schools.remove(this._id)
     }
-  }
 
+    if (event.target.className == "editbtn") {
+      Session.set('schoolDetails', this);
+      $('#schoolDetails').openModal();
+    }
+  }
+});
+
+Template.schools.helpers({
+    currentSchool: function () {
+        return Session.get('schoolDetails');
+    }
 });

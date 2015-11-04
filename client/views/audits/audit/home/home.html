@@ -1,59 +1,63 @@
 <template name="home">
   <div class="container">
     <h3>{{this.audit.school.schoolDetails.INSTITUTION_NAME}}</h3>
+    <div class="row">
+      <div class="input-field col s6">
+        <h5>How many Form B's would you like to add?</h5>
+      </div>
+      <div class="input-field col s1">
+        <input id='numberOfFormBs' type="text" class="validate number">
+      </div>
+    </div>
     <form id="addForms">
-      <div class="row">
-        <div class="input-field col s6">
-          <h5>How many Form B's would you like to add?</h5>
-        </div>
-        <div class="input-field col s1">
-          <input id='numberOfFormBs' type="text" class="validate number">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Province</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.PROVINCE_NAME}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>District</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.DISTRICT_NAME}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Telephone No.</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.TELEPHONE_NO}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Street No.</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.STREET_NO}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Street Name</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.STREET_NAME}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Township or Village</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.TOWNSHIP_OR_VILLAGE_NAME}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Suburb</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.SUBURB}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Town or City</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.TOWN_OR_CITY}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>Postal Code</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.POSTAL_CODE}}</div>
-      </div>
-      <div class="row">
-        <div class="col s3"><b>NEIMS number</b></div>
-        <div class="col s9">{{this.audit.school.schoolDetails.NEIMS_NUMBER}}</div>
-      </div>
+      {{> schoolDetails this.audit.school.schoolDetails}}
       <a class="save btn" href="{{pathFor 'audit.edit' _id=this.audit._id}}">Go to Form</a>
-   </form>
+    </form>
    <br/>
   </div>
+</template>
+
+<template name="schoolDetails">
+    <div class="row">
+      <div class="col s3"><b>Province</b></div>
+      <div class="col s9">{{this.PROVINCE_NAME}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>District</b></div>
+      <div class="col s9">{{this.DISTRICT_NAME}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Telephone No.</b></div>
+      <div class="col s9">{{this.TELEPHONE_NO}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Street No.</b></div>
+      <div class="col s9">{{this.STREET_NO}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Street Name</b></div>
+      <div class="col s9">{{this.STREET_NAME}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Township or Village</b></div>
+      <div class="col s9">{{this.TOWNSHIP_OR_VILLAGE_NAME}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Suburb</b></div>
+      <div class="col s9">{{this.schoolDetails.SUBURB}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Town or City</b></div>
+      <div class="col s9">{{this.TOWN_OR_CITY}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>Postal Code</b></div>
+      <div class="col s9">{{this.POSTAL_CODE}}</div>
+    </div>
+    <div class="row">
+      <div class="col s3"><b>NEIMS number</b></div>
+      <div class="col s9">{{this.NEIMS_NUMBER}}</div>
+    </div>
 </template>
 <!--
 <template name="accounts">
