@@ -26,7 +26,6 @@ Template.home.events({
       audit.forms.push(formToAdd);
     }
     Audits.update({_id: audit._id}, {$set: {forms: audit.forms} });
-
     template.find('#addForms').reset();
     Router.go('audit.home', {_id: audit._id, _formIndex: 0, _sectionIndex: 0, _subsectionIndex: 0});
 

@@ -4,6 +4,33 @@
     <h4>Select an audit to update</h4>
     <a class="btn" href="/audit/new">New Audit</a>
     {{> manageAudits}}
+    <!-- Modal Structure -->
+    <div id="transferModal" class="modal modal-fixed-footer">
+      <div class="modal-content">
+        <h4>Transfer {{transferSchoolName}} to user</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User Email Address</th>
+              <th>Select</th>
+            </tr>
+          </thead>
+          <tbody>
+         {{#each users}}
+          <tr>
+            <td>{{emails.[0].address}}</td>
+            <td><p><input checked="false" name="userlist" type="radio" value="user" id="{{_id}}"/><label for="{{_id}}"></label></p></td>
+          </tr>
+          {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <a class="modal-action modal-cancel modal-close btn-flat ">Cancel</a>
+        <a class="modal-action modal-transfer modal-close btn-flat ">Transfer</a>
+      </div>
+    </div>
+
   </div>
 </template>
 
