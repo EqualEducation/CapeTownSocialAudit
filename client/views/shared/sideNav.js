@@ -122,7 +122,7 @@ Template.registerHelper('shouldShow', function(hasChanges, isComplete) {
     return 'done';
   }
 
-  if (!isComplete) {
+  if (!isComplete && hasChanges) {
     return 'warning';
   }
 });

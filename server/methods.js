@@ -335,33 +335,49 @@ Meteor.methods({
     var totalQs = 0;
     var totalAnsweredQs = 0;
 
-    audit.forms.forEach(function(form) {
-        if (form != undefined) {
-          form.sections.forEach(function(section) {
-          if (section != undefined && section.name != 'grades' && section.name != 'staff') {
-            section.sub_sections.forEach(function(subsection) {
-            if (subsection != undefined) {
-              var hasMissingData;
-              if (subsection.questions != undefined) {
-                var isComplete = true;
-                subsection.questions.forEach(function(question) {
-                  totalQs++;
-                  if (question.value != undefined && question.value != '') {
-                    totalAnsweredQs++;
-                  } else {
-                    isComplete = false;
+    audit.forms.forEach(function(form)
+    {
+        if (form != undefined)
+        {
+          form.sections.forEach(function(section)
+          {
+            if (section != undefined && section.name != 'grades' && section.name != 'staff')
+            {
+              section.sub_sections.forEach(function(subsection)
+              {
+                if (subsection != undefined)
+                {
+                  var hasMissingData;
+                  if (subsection != undefined && subsection.name != 'formA.school_demographics.grades' && subsection.name != 'formA.school_demographics.staff')
+                  {
+                    var isComplete = true;
+                    if (subsection.questions != undefined){
+                      subsection.questions.forEach(function(question)
+                      {
+                        totalQs++;
+                        if (question.value != undefined && question.value != '')
+                        {
+                          totalAnsweredQs++;
+                        }
+                        else
+                        {
+                          isComplete = false;
+                        }
+                      })
+                    }
+
+                    subsection.isComplete = isComplete;
                   }
-                })
-                subsection.isComplete = isComplete;
-              }
+                  else
+                  {
+                    subsection.isComplete = true;
+                  }
+                }
+              })
             }
-            })
-          } else {
-            subsection.isComplete = true;
-          }
           })
         }
-        })
+      })
       var percentage = totalAnsweredQs/totalQs*100;
       audit.complete = Math.round(percentage * 1) / 1;
       return audit;

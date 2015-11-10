@@ -180,8 +180,7 @@ function updateAudit(object, template) {
           var selected = template.findAll( "input[type=checkbox]:checked");
           var values = [];
           selected.forEach(function(selection) {
-            console.log(selection)
-            console.log(selection.name + ' ---- ' + question.id);
+            // console.log(selection.name + ' ---- ' + question.id);
             if (selection.name == question.id) {
               values.push(selection.value);
             }
@@ -191,8 +190,7 @@ function updateAudit(object, template) {
             var selected = template.findAll("input[type=radio]:checked");
             var values = [];
             selected.forEach(function(selection) {
-              console.log(selection)
-              console.log(selection.name + ' ---- ' + question.id);
+              // console.log(selection.name + ' ---- ' + question.id);
               if (selection.name == question.id) {
                 // console.log(selection.name + ' ---- ' + question.id);
                 values.push(selection.value);
@@ -225,7 +223,7 @@ function updateAudit(object, template) {
     Meteor.call('calculatePercentageComplete', audit, function(err, response) {
       // console.log(err);
       console.log(response)
-      var updated = Audits.update({_id: response._id}, {$set: {forms: response.forms, complete: audit.complete} });
+      var updated = Audits.update({_id: response._id}, {$set: {forms: response.forms, complete: response.complete} });
     });
 
     var formIndex = Session.get('formIndex');
