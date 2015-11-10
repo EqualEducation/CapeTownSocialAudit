@@ -338,30 +338,33 @@ Meteor.methods({
     audit.forms.forEach(function(form) {
         if (form != undefined) {
           form.sections.forEach(function(section) {
-          if (section != undefined) {
+          if (section != undefined && section.name != 'grades' && section.name != 'staff') {
             section.sub_sections.forEach(function(subsection) {
             if (subsection != undefined) {
+              var hasMissingData;
               if (subsection.questions != undefined) {
+                var isComplete = true;
                 subsection.questions.forEach(function(question) {
-                totalQs++;
-                if (question.value != undefined && question.value != '') {
-                  totalAnsweredQs++;
-                }
+                  totalQs++;
+                  if (question.value != undefined && question.value != '') {
+                    totalAnsweredQs++;
+                  } else {
+                    isComplete = false;
+                  }
                 })
+                subsection.isComplete = isComplete;
               }
             }
             })
+          } else {
+            subsection.isComplete = true;
           }
           })
         }
         })
-      console.log("TOTAL Q's: " + totalQs);
-      console.log("TOTAL Answered Q's: " + totalAnsweredQs);
       var percentage = totalAnsweredQs/totalQs*100;
-      Math.round(percentage * 100) / 100
-      console.log("PRECENTAGE: " + percentage);
-      Audits.update({_id: audit._id}, {$set: {complete: Math.round(percentage * 100) / 100} });
-      return percentage;
+      audit.complete = Math.round(percentage * 1) / 1;
+      return audit;
 
   }
 });

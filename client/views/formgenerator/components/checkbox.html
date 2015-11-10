@@ -4,8 +4,8 @@
       <p>{{label}}</p>
           {{#each key_value options}}
                <p>
-                <input type="checkbox" checked="{{isSelected ../value value}}" id={{../id}}_{{key}} value={{value}}>
-                <label for={{../id}}_{{key}}>{{value}}</label>
+                 <input name={{../id}} type="checkbox" checked="{{isSelected ../value value}}" id={{../id}}_{{key}} value={{value}}>
+                 <label for={{../id}}_{{key}}>{{value}}</label>
               </p>
           {{/each}}
       </div>

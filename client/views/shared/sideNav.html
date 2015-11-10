@@ -15,7 +15,7 @@
               <ul class="collection">
                 {{#each this.sections}}
                     {{#each this.sub_sections}}
-                      <li><a class='changeIndex collection-item truncate {{shouldHighlightSubsection this.name}}'>{{this.display_name}}<i class="secondary-content green-text material-icons {{shouldShow this.hasChanges}}">done</i></a></li>
+                      <li><a class='changeIndex collection-item truncate {{shouldHighlightSubsection this.name}}'>{{this.display_name}}<i class="secondary-content teal-text material-icons">{{shouldShow this.hasChanges this.isComplete}}</i></a></li>
                     {{/each}}
                 {{/each}}
               </ul>

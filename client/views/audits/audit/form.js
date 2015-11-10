@@ -65,7 +65,6 @@ Template.subsection.events({
     decrementFormSubsection(template)
   },
   'submit' : function(event, template) {
-    console.log(this)
     updateAudit(this, template);
   }
 });
@@ -144,6 +143,7 @@ function decrementFormSubsection(template) {
 }
 
 function updateAudit(object, template) {
+    console.log('updating audit')
     event.preventDefault();
     var subsection = object.subsection;
     if (subsection.subtype == 'grades' || subsection.subtype == 'staff'){
@@ -180,8 +180,9 @@ function updateAudit(object, template) {
           var selected = template.findAll( "input[type=checkbox]:checked");
           var values = [];
           selected.forEach(function(selection) {
+            console.log(selection)
+            console.log(selection.name + ' ---- ' + question.id);
             if (selection.name == question.id) {
-              // console.log(selection.name + ' ---- ' + question.id);
               values.push(selection.value);
             }
           });
@@ -190,6 +191,8 @@ function updateAudit(object, template) {
             var selected = template.findAll("input[type=radio]:checked");
             var values = [];
             selected.forEach(function(selection) {
+              console.log(selection)
+              console.log(selection.name + ' ---- ' + question.id);
               if (selection.name == question.id) {
                 // console.log(selection.name + ' ---- ' + question.id);
                 values.push(selection.value);
@@ -218,7 +221,12 @@ function updateAudit(object, template) {
     });
 
     audit.forms[form[0].index].sections[section[0].index].sub_sections[subsection.index] = subsection;
-    var updated = Audits.update({_id: audit._id}, {$set: {forms: audit.forms} });
+    console.log(audit);
+    Meteor.call('calculatePercentageComplete', audit, function(err, response) {
+      // console.log(err);
+      console.log(response)
+      var updated = Audits.update({_id: response._id}, {$set: {forms: response.forms} });
+    });
 
     var formIndex = Session.get('formIndex');
     var sectionIndex = Session.get('sectionIndex');
@@ -230,4 +238,5 @@ function updateAudit(object, template) {
         template.find('#' + subsection.id).reset();
         Router.go('audit.edit', {_id: audit._id, _formIndex: formIndex, _sectionIndex: sectionIndex, _subsectionIndex: subsectionIndex});
     }
+
 }

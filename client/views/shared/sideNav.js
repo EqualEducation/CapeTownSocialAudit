@@ -109,13 +109,20 @@ Template.registerHelper('shouldHighlightSubsection', function(name){
   return addClass;
 });
 
-Template.registerHelper('shouldShow', function(hasChanges) {
-  var shouldShow = "hide";
-  if (hasChanges != undefined) {
-    if (hasChanges == true) {
-      shouldShow = "";
-    }
+Template.registerHelper('shouldShow', function(hasChanges, isComplete) {
+  // var shouldShow = "hide";
+  // if (hasChanges != undefined) {
+  //   if (hasChanges == true) {
+  //     shouldShow = "";
+  //   }
+  // }
+  //
+  // return shouldShow;
+  if (isComplete && hasChanges) {
+    return 'done';
   }
 
-  return shouldShow;
+  if (!isComplete) {
+    return 'warning';
+  }
 });
