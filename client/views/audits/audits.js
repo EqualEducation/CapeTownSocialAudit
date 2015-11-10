@@ -1,5 +1,8 @@
 
 Template.manageAudits.helpers({
+    perecentage_complete: function() {
+
+    },
     settings: function ()
     {
       return {
@@ -10,6 +13,7 @@ Template.manageAudits.helpers({
             { key: 'school.schoolDetails.INSTITUTION_NAME', label: 'Name' },
             { key: 'school.schoolDetails.DISTRICT_NAME', label: 'District' },
             { key: 'user.email', label: 'User' },
+            { key: 'complete', label: '% Complete' },
             { key: 'update', label: '', fn: function () { return new Spacebars.SafeString('<button type="button" class="editbtn">Update</button>') } },
             { key: 'delete', label: '', fn: function () {
               if (userIsInRole('admin')) {

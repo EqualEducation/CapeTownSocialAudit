@@ -65,95 +65,9 @@ Template.subsection.events({
     decrementFormSubsection(template)
   },
   'submit' : function(event, template) {
-    event.preventDefault();
-    var subsection = this.subsection;
-    if (subsection.subtype == 'grades' || subsection.subtype == 'staff'){
-      if (subsection.subtype == 'staff') {
-        var value = template.find('#' + subsection.id + '_comment').value
-        subsection.comment = value;
-      }
-
-      subsection.rows.forEach(function(row){
-        var rowValues = [];
-        subsection.columns.forEach(function(col){
-          if (col.type == 'calculated'){
-            var calculatedObj = col;
-            calculateTotals(subsection, calculatedObj);
-          } else if (col.type != 'label') {
-            var itemId = col.id + '_' + row.id;
-            var item = new Object();
-            item.id = col.id;
-            var value = template.find('#' + itemId).value
-            item.value = value;
-            rowValues.push(item);
-          }
-        })
-        row.values = rowValues;
-      })
-    } else {
-      subsection.questions.forEach(function(question){
-        if(question.hasComment) {
-            var value = template.find('#' + question.id + '_comment').value
-            question.comment = value;
-        }
-
-        if (question.type == 'checkbox') {
-          var selected = template.findAll( "input[type=checkbox]:checked");
-          var values = [];
-          selected.forEach(function(selection) {
-            if (selection.name == question.id) {
-              // console.log(selection.name + ' ---- ' + question.id);
-              values.push(selection.value);
-            }
-          });
-          question.value = values;
-        } else if(question.type == 'dropdown') {
-            var selected = template.findAll("input[type=radio]:checked");
-            var values = [];
-            selected.forEach(function(selection) {
-
-              if (selection.name == question.id) {
-                // console.log(selection.name + ' ---- ' + question.id);
-                values.push(selection.value);
-              }
-            });
-            question.value = values;
-        } else {
-          var value = template.find('#' + question.id).value
-          question.value = value;
-        }
-      })
-    }
-
-    subsection.hasChanges = true;
-    var audit = this.audit;
-
-    var str = subsection.name;
-    var navigationItems = str.split(".");
-
-    var form = audit.forms.filter(function( form ) {
-      return form.name == navigationItems[0];
-    });
-
-    var section = form[0].sections.filter(function( section ) {
-      return section.name == navigationItems[0]+'.'+navigationItems[1];
-    });
-
-    audit.forms[form[0].index].sections[section[0].index].sub_sections[subsection.index] = subsection;
-    var updated = Audits.update({_id: audit._id}, {$set: {forms: audit.forms} });
-
-    var formIndex = Session.get('formIndex');
-    var sectionIndex = Session.get('sectionIndex');
-    var subsectionIndex = Session.get('subsectionIndex')
-
-    if (Session.get('isLastSection')) {
-      Router.go('audits');
-    } else if (formIndex != form[0].index || sectionIndex != section[0].index || subsectionIndex != subsection.index) {
-        template.find('#' + subsection.id).reset();
-
-      Router.go('audit.edit', {_id: audit._id, _formIndex: formIndex, _sectionIndex: sectionIndex, _subsectionIndex: subsectionIndex});
-    }
-  },
+    console.log(this)
+    updateAudit(this, template);
+  }
 });
 
 
@@ -227,4 +141,93 @@ function decrementFormSubsection(template) {
   Session.set('sectionIndex', sectionIndex);
   Session.set('subsectionIndex', subsectionIndex);
   Session.set('isLastSection', false)
+}
+
+function updateAudit(object, template) {
+    event.preventDefault();
+    var subsection = object.subsection;
+    if (subsection.subtype == 'grades' || subsection.subtype == 'staff'){
+      if (subsection.subtype == 'staff') {
+        var value = template.find('#' + subsection.id + '_comment').value
+        subsection.comment = value;
+      }
+
+      subsection.rows.forEach(function(row){
+        var rowValues = [];
+        subsection.columns.forEach(function(col){
+          if (col.type == 'calculated'){
+            var calculatedObj = col;
+            calculateTotals(subsection, calculatedObj);
+          } else if (col.type != 'label') {
+            var itemId = col.id + '_' + row.id;
+            var item = new Object();
+            item.id = col.id;
+            var value = template.find('#' + itemId).value
+            item.value = value;
+            rowValues.push(item);
+          }
+        })
+        row.values = rowValues;
+      })
+    } else {
+      subsection.questions.forEach(function(question){
+        if(question.hasComment) {
+            var value = template.find('#' + question.id + '_comment').value
+            question.comment = value;
+        }
+
+        if (question.type == 'checkbox') {
+          var selected = template.findAll( "input[type=checkbox]:checked");
+          var values = [];
+          selected.forEach(function(selection) {
+            if (selection.name == question.id) {
+              // console.log(selection.name + ' ---- ' + question.id);
+              values.push(selection.value);
+            }
+          });
+          question.value = values;
+        } else if(question.type == 'dropdown') {
+            var selected = template.findAll("input[type=radio]:checked");
+            var values = [];
+            selected.forEach(function(selection) {
+              if (selection.name == question.id) {
+                // console.log(selection.name + ' ---- ' + question.id);
+                values.push(selection.value);
+              }
+            });
+            question.value = values;
+        } else {
+          var value = template.find('#' + question.id).value
+          question.value = value;
+        }
+      })
+    }
+
+    subsection.hasChanges = true;
+    var audit = object.audit;
+
+    var str = subsection.name;
+    var navigationItems = str.split(".");
+
+    var form = audit.forms.filter(function( form ) {
+      return form.name == navigationItems[0];
+    });
+
+    var section = form[0].sections.filter(function( section ) {
+      return section.name == navigationItems[0]+'.'+navigationItems[1];
+    });
+
+    audit.forms[form[0].index].sections[section[0].index].sub_sections[subsection.index] = subsection;
+    var updated = Audits.update({_id: audit._id}, {$set: {forms: audit.forms} });
+
+    var formIndex = Session.get('formIndex');
+    var sectionIndex = Session.get('sectionIndex');
+    var subsectionIndex = Session.get('subsectionIndex')
+
+    if (Session.get('isLastSection')) {
+      Router.go('audits');
+    } else if (formIndex != form[0].index || sectionIndex != section[0].index || subsectionIndex != subsection.index) {
+        template.find('#' + subsection.id).reset();
+        Router.go('audit.edit', {_id: audit._id, _formIndex: formIndex, _sectionIndex: sectionIndex, _subsectionIndex: subsectionIndex});
+    }
 }

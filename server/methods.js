@@ -330,4 +330,38 @@ Meteor.methods({
       html: html
     });
   },
+  calculatePercentageComplete: function (audit) {
+    console.log("ID: " + audit._id);
+    var totalQs = 0;
+    var totalAnsweredQs = 0;
+
+    audit.forms.forEach(function(form) {
+        if (form != undefined) {
+          form.sections.forEach(function(section) {
+          if (section != undefined) {
+            section.sub_sections.forEach(function(subsection) {
+            if (subsection != undefined) {
+              if (subsection.questions != undefined) {
+                subsection.questions.forEach(function(question) {
+                totalQs++;
+                if (question.value != undefined && question.value != '') {
+                  totalAnsweredQs++;
+                }
+                })
+              }
+            }
+            })
+          }
+          })
+        }
+        })
+      console.log("TOTAL Q's: " + totalQs);
+      console.log("TOTAL Answered Q's: " + totalAnsweredQs);
+      var percentage = totalAnsweredQs/totalQs*100;
+      Math.round(percentage * 100) / 100
+      console.log("PRECENTAGE: " + percentage);
+      Audits.update({_id: audit._id}, {$set: {complete: Math.round(percentage * 100) / 100} });
+      return percentage;
+
+  }
 });

@@ -13,8 +13,6 @@ Template.registerHelper('isActive', function(val) {
   return classes;
 })
 
-
-
 Template.registerHelper('getValueOfDynamicObject', function(obj, valueToFind) {
   var val = obj[valueToFind];
   return val
