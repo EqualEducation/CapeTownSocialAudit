@@ -225,7 +225,7 @@ function updateAudit(object, template) {
     Meteor.call('calculatePercentageComplete', audit, function(err, response) {
       // console.log(err);
       console.log(response)
-      var updated = Audits.update({_id: response._id}, {$set: {forms: response.forms} });
+      var updated = Audits.update({_id: response._id}, {$set: {forms: response.forms, complete: audit.complete} });
     });
 
     var formIndex = Session.get('formIndex');
