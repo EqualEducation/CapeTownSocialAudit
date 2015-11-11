@@ -25,14 +25,10 @@ Template.manageAudits.helpers({
 
 Template.audits.helpers({
   transferSchoolName : function() {
-    return Session.get('transferAudit').school.schoolDetails.INSTITUTION_NAME;
+    if (Session.get('transferAudit') != undefined) {
+      return Session.get('transferAudit').school.schoolDetails.INSTITUTION_NAME;
+    }
   },
-  // transferFromUserId : function(userId) {
-  //   console.log(Session.get('transferAudit').user.id)
-  //   console.log(userId)
-  //
-  //   return Session.get('transferAudit').user._id == userId;
-  // }
 })
 
 Template.audits.events({
@@ -57,7 +53,6 @@ Template.audits.events({
       Audits.update({_id: this._id}, {$set: {isDeleted: true} })
 
     }else if (event.target.className.indexOf("transferbtn") > -1) {
-      console.log('open modal')
       Session.set('transferAudit', this)
       $('#transferModal').openModal();
     }

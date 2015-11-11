@@ -8,6 +8,8 @@
     <div id="transferModal" class="modal modal-fixed-footer">
       <div class="modal-content">
         <h4>Transfer {{transferSchoolName}} to user</h4>
+        <p>NOTE: You will no longer have access to this audit once it has been transferred</p>
+
         <table class="table">
           <thead>
             <tr>
@@ -19,7 +21,7 @@
          {{#each users}}
           <tr>
             <td>{{emails.[0].address}}</td>
-            <td><p><input checked="false" name="userlist" type="radio" value="user" id="{{_id}}"/><label for="{{_id}}"></label></p></td>
+            <td><p><input name="userlist" type="radio" value="user" id="{{_id}}"/><label for="{{_id}}"></label></p></td>
           </tr>
           {{/each}}
           </tbody>
