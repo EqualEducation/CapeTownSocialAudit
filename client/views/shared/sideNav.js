@@ -1,7 +1,7 @@
 
 Template.sideNav.onRendered(function() {
   $('.collapsible').collapsible({
-    accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
   });
   $('.modal-trigger').leanModal();
 
@@ -47,6 +47,9 @@ Template.form.events({
     Audits.update({_id: audit._id}, {$set: {forms: audit.forms} });
 
     template.find('#addForms').reset();
+    $('.collapsible').collapsible({
+      accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
   },
   'keypress .number' : function(evt){
       var theEvent = evt;
@@ -80,7 +83,6 @@ Template.form.events({
 
     if (t.find('#' + Session.get('currentSubsectionId')) != undefined)
       t.find('#' + Session.get('currentSubsectionId')).reset();
-
   }
 })
 
@@ -89,35 +91,24 @@ Template.registerHelper('shouldShowSideNav', function(){
     return isViewingAnAudit;
 });
 
-Template.registerHelper('shouldHighlightForm', function(name){
-  // var addClass = ""
-  // var activeForm = Session.get('activeForm')
-  // if (activeForm == name){
-  //     addClass= 'active'
-  // }
-  // console.log(activeForm + ' : ' + name + ' - ' + addClass)
-  // return addClass;
+Template.registerHelper('shouldExpandForm', function(name){
+  console.log('ACTIVE FORM: ' + Session.get('activeForm'))
+  // console.log('IS LAST SECTION: ' + Session.get('isLastSection'))
+  if (Session.get('activeForm') === name)
+ {
+   console.log($("#"+name).click());
+   if (!$("#"+name).hasClass('active')) {
+     var myClass = $("#"+name).click();
+     Session.set('isLastSection', false)
+   }
+  }
 });
 
 Template.registerHelper('shouldHighlightSubsection', function(name){
-  var addClass = ""
-  var activeSubsection = Session.get('activeSubsection')
-  if (activeSubsection == name){
-      addClass= 'active'
-  }
-  // console.log(activeSubsection + ' : ' + name + ' - ' + addClass)
-  return addClass;
+  return (Session.get('activeSubsection') === name) ? "active" : ""
 });
 
 Template.registerHelper('shouldShow', function(hasChanges, isComplete) {
-  // var shouldShow = "hide";
-  // if (hasChanges != undefined) {
-  //   if (hasChanges == true) {
-  //     shouldShow = "";
-  //   }
-  // }
-  //
-  // return shouldShow;
   if (isComplete && hasChanges) {
     return 'done';
   }

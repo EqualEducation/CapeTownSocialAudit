@@ -10,7 +10,8 @@
           </li>
         {{#each this.audit.forms}}
           <li>
-            <div class="collapsible-header active">{{this.display_name}}</div>
+            {{shouldExpandForm this.name}}
+            <div class="collapsible-header active" id="{{this.name}}">{{this.display_name}}</div>
             <div class="collapsible-body">
               <ul class="collection">
                 {{#each this.sections}}
@@ -41,8 +42,8 @@
            <p>A bunch of text</p> -->
          </div>
          <div class="modal-footer">
-           <a href="#!" class=" modal-action modal-close save_formbs btn-flat">Add</a>
-           <a href="#!" class=" modal-action modal-close cancel_formbs btn-flat">Cancel</a>
+           <a class=" modal-action modal-close save_formbs btn-flat">Add</a>
+           <a class=" modal-action modal-close cancel_formbs btn-flat">Cancel</a>
          </div>
        </div>
 
