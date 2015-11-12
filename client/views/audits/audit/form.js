@@ -162,9 +162,12 @@ function updateAudit(object, template) {
             var itemId = col.id + '_' + row.id;
             var item = new Object();
             item.id = col.id;
-            var value = template.find('#' + itemId).value
-            item.value = value;
-            rowValues.push(item);
+            var element = template.find('#' + itemId);
+            if (element != undefined){
+              var value = element.value
+              item.value = value;
+              rowValues.push(item);
+            }
           }
         })
         row.values = rowValues;
