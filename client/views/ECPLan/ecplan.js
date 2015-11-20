@@ -1,5 +1,3 @@
-Meteor.subscribe("ecschools");
-
 Template.ecplan.helpers({
 
   
