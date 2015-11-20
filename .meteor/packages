@@ -14,7 +14,6 @@ mrt:jquery-ui
 accounts-password
 accounts-ui
 aslagle:reactive-table
-meteortoys:allthings
 jquery
 alanning:roles
 appcache
@@ -35,3 +34,4 @@ lfergon:exportcsv
 meteorhacks:kadira
 multiply:iron-router-progress
 easy:search
+meteortoys:allthings
