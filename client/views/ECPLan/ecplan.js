@@ -7,7 +7,7 @@ Template.ecplan.helpers({
     return { 'class': 'easy-search-input', 'placeholder': 'Example: Mandela Primary' };
   },
   schools: function () {
-    return ECSchools.find({}, { sort: { schoolName: -1, name: 1 } });
+    return ECSchools.find({}, { sort: { schoolName: -1 } });
   },
   index: function () {
     return ECSchoolsIndex;
