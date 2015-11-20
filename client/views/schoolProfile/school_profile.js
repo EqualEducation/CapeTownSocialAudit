@@ -1,4 +1,4 @@
-Template.ecplan.helpers({
+Template.schoolProfile.helpers({
 
   
   inputAttributes: function () {
