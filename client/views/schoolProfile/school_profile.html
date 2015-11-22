@@ -2,7 +2,11 @@
   <div class="container">
     <h2>School Profile</h2>
     
-    <h5>Please type your school name here:</h5>      
+    <div class="aboutResults">
+      <p>School infrastructure is funded either at the provincial or national level. ASIDI, EC Plan, etc.</p>
+    </div>
+    
+    <h5>To find out if your school has been allocated money for new school infrastructure, please type your school name here:</h5>      
    
    {{> EasySearch.Input index=index attributes=inputAttributes }}
 
@@ -46,7 +50,7 @@
    
      <div class="deptDocs">
   
-        <h5>The official Eastern Cape Department of Education Documents:</h5>
+        <h5>Data Sources</h5>
     
        <div class="collection">
           <a href="http://www.education.gov.za/LinkClick.aspx?fileticket=ibIphhew3Eo%3D&tabid=759&mid=3094" target="_blank" class="collection-item        ECDoc">Eastern Cape Norms and Standards Implementation Plan</a>
@@ -73,11 +77,11 @@
 <template name="schoolCard">
 
   <div class="schoolCard">
-    <h2>School Information</h2>
+    <h4>School Information</h4>
 
       {{> schoolInfo}}
 
-    <h2>Government Infrastructure Plans</h2>
+    <h5>Government Infrastructure Plans</h5>
 
       {{> ECPlan}}
 
@@ -128,13 +132,6 @@
 
 </template>
 
-<template name="PAIA">
-  <h4>EE's PAIA Request</h4>
-  
-    <p> {{schoolName}} is on the PAIA list for {{PAIAvar}}  </p>
-       
-</template>
-
 <template name="ASIDI">
   
   <h4>ASIDI Master List</h4>
@@ -150,27 +147,5 @@
        
 </template>
 
-        
-      
-<template name="EEVisits">
-      <ul>
-        {{#each visits}}
-          <li>We visited them on:{{visitDate}}</li>
-          <li>Our notes from this visit:{{visitNotes}}</li>
-        {{/each}}
-      </ul>
-      {{> addVisit}}
-    
-</template>
-
-
-<template name="addVisit">
-  <h4>Add visit</h4>
-  <p>Please fill in the following form for a new school visit:</p>
-      <form class="addVisit">
-        <textarea> </textarea>
-        <input type="date" name="visitDate" class="visitDate"/>
-      </form>
-</template>
 
 
