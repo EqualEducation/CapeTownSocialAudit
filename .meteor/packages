@@ -16,7 +16,6 @@ accounts-ui
 aslagle:reactive-table
 jquery
 alanning:roles
-appcache
 standard-minifiers
 meteor-base
 mobile-experience
