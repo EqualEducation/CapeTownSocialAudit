@@ -1,9 +1,12 @@
 <template name='schoolProfile'>
   <div class="container">
-    <h2>School Profile</h2>
+    <h2>Is Your School in the Plans?</h2>
     
-    <div class="aboutResults">
-      <p>The Norms and Standards requires every province to release implementation plans. Type your school name here to learn what the Eastern Cape Department of Education has planned for your school:</p>
+    <div class="introSearch">
+      <p>The Norms and Standards requires every province to release implementation plans.</p>
+      
+      <p>Type your school name here to learn what the Eastern Cape Department of Education has planned for your school:</p>
+      
     </div>
     
    
@@ -76,14 +79,11 @@
 <template name="schoolCard">
 
   <div class="schoolCard">
-    <h4>School Information</h4>
-
-      {{> schoolInfo}}
-
-    <h5>Government Infrastructure Plans</h5>
 
       {{> ECPlan}}
-
+      
+      There is also a national programme, the <a href="http://www.education.gov.za/Home/ASIDI/tabid/613/Default.aspx">Accelerated Schools Infrastructure Delivery Initiative (ASIDI)</a>, that is helping to build new schools in the province. This is separate from the Provincial plans.
+      
       {{> ASIDI}}
 
   </div>
@@ -91,26 +91,8 @@
 </template>
 
 
-<template name="schoolInfo">
-    <ul>
-      <li>School name: {{schoolName}}</li>
-      <li>District: {{districtName}}</li>
-      <li>Principal: {{managerName}}</li>
-      <li>Phone number: {{phoneNum}}</li>
-      <li>Cell phone number: {{cellno}}</li>
-      <li>Email Address: {{email}}</li>
-      <li>Fax number: {{faxNum}}</li>
-      <li>GPS: {{GIS_Lat}}, {{GIS_Long}}</li>  
-      <li>Address: {{address_old}}</li>
-      <li>Enrollment: {{snapEnrol}}</li>
-      <li>Grade R enrollment: {{gradeREnrol}}</li>
-            
-    </ul>
-</template>
-
 <template name="ECPlan">
   <h4>EC Provincial Infrastructure Priority List</h4>
-  
 
         <ul>
             <li> Implementing agent: <span class="yellow-text">{{agent}}  </span></li>
