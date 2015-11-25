@@ -127,8 +127,6 @@ Meteor.methods({
                   grades.neims = audit.school.schoolDetails.NEIMS_NUMBER;
                   subsection.rows.forEach(function(row){
                     var rowValues = row.values;
-
-
                     if (rowValues != undefined) {
                       subsection.columns.forEach(function(col){
                         if (col.type != 'label') {
