@@ -1,7 +1,7 @@
 Template.schoolProfile.helpers({
 
   
- m inputAttributes: function () {
+  inputAttributes: function () {
     return { 'class': 'easy-search-input', 'placeholder': 'Example: Mandela Primary' };
   },
   ecschools: function () {
