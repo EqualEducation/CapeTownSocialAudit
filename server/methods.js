@@ -353,7 +353,7 @@ Meteor.methods({
                       subsection.questions.forEach(function(question)
                       {
                         totalQs++;
-                        if (question.value != undefined && question.value != '')
+                        if ((question.value != undefined && question.value != '') || (question.comment != undefined && question.comment != ''))
                         {
                           totalAnsweredQs++;
                         }
@@ -363,7 +363,6 @@ Meteor.methods({
                         }
                       })
                     }
-
                     subsection.isComplete = isComplete;
                   }
                   else
