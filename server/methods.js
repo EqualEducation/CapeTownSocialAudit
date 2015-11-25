@@ -346,7 +346,7 @@ Meteor.methods({
                 if (subsection != undefined)
                 {
                   var hasMissingData;
-                  if (subsection != undefined && subsection.name != 'formA.school_demographics.grades' && subsection.name != 'formA.school_demographics.staff')
+                  if (subsection != undefined && subsection.name != 'formA.school_demographics.grades' && subsection.name != 'formA.school_demographics.staff' && subsection.name != 'formC.general_infrastructure.sanitation')
                   {
                     var isComplete = true;
                     if (subsection.questions != undefined){
@@ -359,6 +359,7 @@ Meteor.methods({
                         }
                         else
                         {
+                          console.log(subsection.name)
                           isComplete = false;
                         }
                       })
