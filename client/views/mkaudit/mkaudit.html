@@ -1,50 +1,10 @@
 <template name='mkaudit'>
   <div class="container">
-    <h2>School Profile</h2>
+    <h2>School Audit</h2>
     
-    <h5>Please type your school name here:</h5>      
-   
-   {{> EasySearch.Input index=index attributes=inputAttributes }}
-
-   {{#EasySearch.IfInputEmpty index=index }}
-   {{else}}
-     {{#if resultsCount}}
-       <div class="padded count-results">{{resultsCount}} results found.</div>
-     {{/if}}
-   {{/EasySearch.IfInputEmpty}}
-
-
-   {{#EasySearch.IfSearching index=index }}
-     <div>Searching</div>
-   {{/EasySearch.IfSearching }}
-
-     {{#EasySearch.Each index=index }}
-       {{> schoolResults}}
-     {{/EasySearch.Each}}
-
-   {{#EasySearch.IfNoResults index=index }}
-     <div class="padded no-results">No results found</div>
-
-   {{/EasySearch.IfNoResults }}
-
-   {{> EasySearch.Pagination index=index maxPages=10 }}
-   {{! > EasySearch.LoadMore index=index }}
-
-   {{#if showMore}}
-     {{> EasySearch.Input name="mini-index" index=index attributes=inputAttributes }}
-
-     <ul>
-       {{#EasySearch.Each name="mini-index" index=index }}
-         <li>{{schoolName}}</li>
-       {{/EasySearch.Each}}
-     </ul>
-   {{/if}}
-
     
-   <div class="divider">
-   </div>
    
-     
+   <iframe src="https://docs.google.com/forms/d/1gbVFUmRDfXfMvhwOcPuvl4fIwzvwMUOvPRNpn0Z5h5I/viewform?embedded=true" width="860" height="3200" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
         
   </div>
 </template> 
