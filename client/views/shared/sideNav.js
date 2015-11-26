@@ -1,8 +1,20 @@
 
 Template.sideNav.onRendered(function() {
-  $('.collapsible').collapsible({
-    accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-  });
+  Session.set('formsCount', 1);
+  this.autorun(function(){
+     // registers a dependency on the number of documents returned by the cursor
+     var formsCount = Session.get('formsCount');
+     // this will log 0 at first, then after the jobs publication is ready
+     // it will log the total number of documents published
+     // initialize the plugin only when Blaze is done with DOM manipulation
+     Tracker.afterFlush(function(){
+       console.log('initialize')
+       this.$(".collapsible").collapsible({
+         accordion: true
+       });
+     }.bind(this));
+   }.bind(this));
+
   $('.modal-trigger').leanModal();
 
   $('.button-collapse').sideNav({
@@ -11,7 +23,6 @@ Template.sideNav.onRendered(function() {
     }
   );
 });
-
 
 Template.form.events({
   'click .cancel_formbs' : function(event, template) {
@@ -23,17 +34,20 @@ Template.form.events({
     var audit = this.audit;
     var totalNumberOfForms = audit.forms.length
 
-    var formBs = audit.forms.filter(function( form ) {
-      return form.name.indexOf("formB") > -1;
-    });
-    var totalNumberOfFormBs= formBs.length
+    //get the biggest form B index
+    var highestIndex = -1;
+    audit.forms.forEach(function(form) {
+      if (form.name.indexOf("formB") > -1 && form.index > highestIndex) {
+        highestIndex = form.index;
+      }
+    })
 
     for(i=0; i<numberOfFormBsToAdd; i++) {
       var formToAdd = JSON.parse(JSON.stringify(formB));
-      var currentFormIndex = totalNumberOfForms + i;
+      var currentFormIndex = highestIndex + 1 + i;
       formToAdd.index = currentFormIndex;
       formToAdd.name = formToAdd.name.replace('formB', 'formB' + currentFormIndex)
-      var display_index = totalNumberOfFormBs + i + 1;
+      var display_index = currentFormIndex + 1;
       formToAdd.display_name = formToAdd.display_name.replace('Form B', 'Form B.' + display_index)
       formToAdd.sections.forEach(function(section) {
         section.name = section.name.replace('formB', 'formB' + currentFormIndex)
@@ -44,7 +58,10 @@ Template.form.events({
 
       audit.forms.push(formToAdd);
     }
-    Audits.update({_id: audit._id}, {$set: {forms: audit.forms} });
+    var update = Audits.update({'_id': audit._id}, {$set: {'forms': audit.forms} });
+    if (update) {
+      Session.set('formsCount', audit.forms.length);
+    }
 
     template.find('#addForms').reset();
     $('.collapsible').collapsible({
@@ -61,6 +78,25 @@ Template.form.events({
         if(theEvent.preventDefault)
           theEvent.preventDefault();
       }
+    },
+    'click .deleteForm' : function(e, t) {
+      var str = this.name;
+      var names = str.split(".");
+      var audit = t.data.audit;
+
+      var count = 0;
+      var index = -1;
+      audit.forms.forEach(function(form) {
+        if (form.name == names[0]) {
+          index = count;
+        }
+        count++;
+      })
+      if (index > -1) {
+        audit.forms.splice(index, 1);
+        Audits.update({'_id': audit._id}, {$set: {'forms': audit.forms} });
+      }
+
     },
   'click .changeIndex' : function(e, t) {
     var str = this.name;
@@ -92,11 +128,11 @@ Template.registerHelper('shouldShowSideNav', function(){
 });
 
 Template.registerHelper('shouldExpandForm', function(name){
-  console.log('ACTIVE FORM: ' + Session.get('activeForm'))
+  // console.log('ACTIVE FORM: ' + Session.get('activeForm'))
   // console.log('IS LAST SECTION: ' + Session.get('isLastSection'))
   if (Session.get('activeForm') === name)
  {
-   console.log($("#"+name).click());
+  //  console.log($("#"+name).click());
    if (!$("#"+name).hasClass('active')) {
      var myClass = $("#"+name).click();
      Session.set('isLastSection', false)

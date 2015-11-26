@@ -14,6 +14,9 @@
             <div class="collapsible-header active" id="{{this.name}}">{{this.display_name}}</div>
             <div class="collapsible-body">
               <ul class="collection">
+                {{#if stringContainsString this.name 'formB'}}
+                  <li><a class='btn collection-item truncate deleteForm' id={{this.name}}>DELETE FORM {{this.index}}</a></li>
+                {{/if}}
                 {{#each this.sections}}
                     {{#each this.sub_sections}}
                       <li><a class='changeIndex collection-item truncate {{shouldHighlightSubsection this.name}}'>{{this.display_name}}<i class="secondary-content teal-text material-icons">{{shouldShow this.hasChanges this.isComplete}}</i></a></li>
