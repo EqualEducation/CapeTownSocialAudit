@@ -83,7 +83,7 @@ Template.dynamicTable.events({
     subsection.objects.push(object);
     subsection.hasChanges = true;
 
-    var audit = Audits.findOne({_id: Router.current().params._id, 'user.id' : Meteor.userId()})
+    var audit = Audits.findOne({_id: Router.current().params._id})
 
     var str = subsection.name;
     var navigationItems = str.split(".");

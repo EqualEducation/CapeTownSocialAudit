@@ -127,8 +127,6 @@ Meteor.methods({
                   grades.neims = audit.school.schoolDetails.NEIMS_NUMBER;
                   subsection.rows.forEach(function(row){
                     var rowValues = row.values;
-
-
                     if (rowValues != undefined) {
                       subsection.columns.forEach(function(col){
                         if (col.type != 'label') {
@@ -348,24 +346,24 @@ Meteor.methods({
                 if (subsection != undefined)
                 {
                   var hasMissingData;
-                  if (subsection != undefined && subsection.name != 'formA.school_demographics.grades' && subsection.name != 'formA.school_demographics.staff')
+                  if (subsection != undefined && subsection.name != 'formA.school_demographics.grades' && subsection.name != 'formA.school_demographics.staff' && subsection.name != 'formC.general_infrastructure.sanitation')
                   {
                     var isComplete = true;
                     if (subsection.questions != undefined){
                       subsection.questions.forEach(function(question)
                       {
                         totalQs++;
-                        if (question.value != undefined && question.value != '')
+                        if ((question.value != undefined && question.value != '') || (question.comment != undefined && question.comment != ''))
                         {
                           totalAnsweredQs++;
                         }
                         else
                         {
+                          console.log(subsection.name)
                           isComplete = false;
                         }
                       })
                     }
-
                     subsection.isComplete = isComplete;
                   }
                   else

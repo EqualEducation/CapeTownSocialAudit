@@ -30,6 +30,10 @@ Template.title.helpers({
       return string1 == string2;
   });
 
+  Template.registerHelper('stringContainsString', function(string1, string2){
+      return string1.indexOf(string2) > -1;
+  });
+
   Handlebars.registerHelper('userIsInRole', function(role){
     return userIsInRole(role);
   });

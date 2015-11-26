@@ -60,9 +60,12 @@ Template.subsection.helpers({
 Template.subsection.events({
   'click .next' : function(event, template) {
     incrementFormSubsection(template)
+    $(window).scrollTop(0);
   },
   'click .previous' : function(event, template) {
     decrementFormSubsection(template)
+    $(window).scrollTop(0);
+
   },
   'submit' : function(event, template) {
     updateAudit(this, template);
@@ -71,6 +74,8 @@ Template.subsection.events({
 
 
 function incrementFormSubsection(template) {
+  console.log('incrementing')
+  var isLastSection = false;
   var formIndex = Session.get('formIndex');
   var sectionIndex = Session.get('sectionIndex');
   var subsectionIndex = Session.get('subsectionIndex')
@@ -79,33 +84,44 @@ function incrementFormSubsection(template) {
   var totalNumberOfSectionsInCurrentForm = audit.forms[formIndex].sections.length;
   var totalNumberOfSubsectionsInCurrentSection = audit.forms[formIndex].sections[sectionIndex].sub_sections.length;
 
+
   if (subsectionIndex + 1 < totalNumberOfSubsectionsInCurrentSection)
   {
+    //move to next subsection in current section in current form
     subsectionIndex++;
   } else
   {
+    //we have reached the last subsection in current section in current form
     if (sectionIndex + 1 < totalNumberOfSectionsInCurrentForm)
     {
+      //move to next sectionin current form
       sectionIndex++;
       subsectionIndex = 0;
     } else
     {
+      isLastSection = true;
+      //we have reached the last section in the current form
       if (formIndex + 1 < totalNumberOfForms)
       {
+        //move to next form
         formIndex++;
         sectionIndex = 0;
         subsectionIndex = 0;
+        //expand new form
       } else
       {
-          Session.set('isLastSection', true)
-         return nil;
+        //we have reached the last form
+        Session.set('isLastForm', true)
+        console.log('isLastForm')
+        return nil;
       }
     }
   }
   Session.set('formIndex', formIndex);
   Session.set('sectionIndex', sectionIndex);
   Session.set('subsectionIndex', subsectionIndex);
-  Session.set('isLastSection', false)
+  Session.set('isLastForm', false)
+  Session.set('isLastSection', isLastSection)
 
 }
 
@@ -132,18 +148,17 @@ function decrementFormSubsection(template) {
     var totalNumberOfSubsectionsInCurrentSection = audit.forms[formIndex].sections[sectionIndex].sub_sections.length;
     subsectionIndex = totalNumberOfSubsectionsInCurrentSection -1;
   } else {
-    Session.set('isLastSection', true)
+    Session.set('isLastForm', true)
     return nil;
   }
 
   Session.set('formIndex', formIndex);
   Session.set('sectionIndex', sectionIndex);
   Session.set('subsectionIndex', subsectionIndex);
-  Session.set('isLastSection', false)
+  Session.set('isLastForm', false)
 }
 
 function updateAudit(object, template) {
-    console.log('updating audit')
     event.preventDefault();
     var subsection = object.subsection;
     if (subsection.subtype == 'grades' || subsection.subtype == 'staff'){
@@ -162,9 +177,12 @@ function updateAudit(object, template) {
             var itemId = col.id + '_' + row.id;
             var item = new Object();
             item.id = col.id;
-            var value = template.find('#' + itemId).value
-            item.value = value;
-            rowValues.push(item);
+            var element = template.find('#' + itemId);
+            if (element != undefined){
+              var value = element.value
+              item.value = value;
+              rowValues.push(item);
+            }
           }
         })
         row.values = rowValues;
@@ -219,10 +237,9 @@ function updateAudit(object, template) {
     });
 
     audit.forms[form[0].index].sections[section[0].index].sub_sections[subsection.index] = subsection;
-    console.log(audit);
     Meteor.call('calculatePercentageComplete', audit, function(err, response) {
       // console.log(err);
-      console.log(response)
+      // console.log(response)
       var updated = Audits.update({_id: response._id}, {$set: {forms: response.forms, complete: response.complete} });
     });
 
@@ -230,7 +247,7 @@ function updateAudit(object, template) {
     var sectionIndex = Session.get('sectionIndex');
     var subsectionIndex = Session.get('subsectionIndex')
 
-    if (Session.get('isLastSection')) {
+    if (Session.get('isLastForm')) {
       Router.go('audits');
     } else if (formIndex != form[0].index || sectionIndex != section[0].index || subsectionIndex != subsection.index) {
         template.find('#' + subsection.id).reset();
