@@ -1,29 +1,61 @@
 <template name='home'>
   <div class="container">
-    <h4>The Michael Komape Campaign for School Infrastructure</h4>
+    <h4 class="center-align">The Michael Komape Campaign for School Infrastructure</h4>
     
     
     <div class="row">
-      <p>The Norms and Standards requires every province to release implementation plans.</p>
-    </div>
-    
-    <div class="row">
+      <p>The Norms and Standards requires every province to release implementation plans according to the following timeframes:</p>
       
-      <a class="waves-effect waves-light btn-large">What has the Department promised my School?</a>
+
     </div>
     
-    {{>schoolSearch}}
-    
     <div class="row">
+      <div class="col s3 center-align">
+        <h4>2016</h4>
+         <i class="large material-icons">info_outline</i>
+         <p>All schools without water, electricity and sanitation must be provided</p>
+      </div>
+      <div class="col s3 center-align">
+        <h4>2020</h4>
+         <i class="large material-icons">input</i>
+        <p>All schools without water, electricity and sanitation must be provided</p>
+      </div>
+      <div class="col s3 center-align">
+        <h4>2023</h4>
+         <i class="large material-icons">invert_colors</i>
+        <p>All schools without water, electricity and sanitation must be provided</p>
+      </div>
+      <div class="col s3 center-align">
+        <h4>2030</h4>
+         <i class="large material-icons">label</i>
+         <p>All schools without water, electricity and sanitation must be provided</p>
+      </div>
       
-      <a class="waves-effect waves-light btn-large">What infrastructure does your school need?</a>
     </div>
-    
-    {{>mkaudit}}
     
     
     <div class="row">
-          <div class="col s4 m4">
+      <div class="col s6">
+      
+        <a class="waves-effect waves-light btn-large">What has the Department promised your school?</a>
+    
+    
+      {{>schoolSearch}}
+      </div>
+
+      <div class="col s6 center-align">
+      
+        <a class="waves-effect waves-light btn-large">What infrastructure does your school need?</a>
+      {{>mkaudit}}
+      
+      </div>
+      
+    
+    
+  </div>
+    
+    <div class="row">
+          <div class="col s6 m4">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
                 <span class="card-title">About the Norms and Standards</span>
@@ -35,10 +67,10 @@
              </div>
             </div>
           </div>
-        </div>
+       
         
-      <div class="row">
-            <div class="col s4 m4">
+     
+            <div class="col s6 m4">
               <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                   <span class="card-title">About Equal Education</span>
@@ -67,63 +99,70 @@
 
 <template name='mkaudit'>
     <h5>School Audit</h5>
-   <iframe src="https://docs.google.com/forms/d/1gbVFUmRDfXfMvhwOcPuvl4fIwzvwMUOvPRNpn0Z5h5I/viewform?embedded=true" width="960" height="3200" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+   <iframe src="https://docs.google.com/forms/d/1gbVFUmRDfXfMvhwOcPuvl4fIwzvwMUOvPRNpn0Z5h5I/viewform?embedded=true" width="400" height="620" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
         
 </template> 
 
 
 <template name='schoolSearch'>
     
-    <div class="row introSearch">
+    <div class="section">
+      <div class="row introSearch">
       
-      <p>Type your school name here to learn what the Eastern Cape Department of Education has planned for your school:</p>
+        <p>Type your school name here to learn what the Eastern Cape Department of Education has planned for your school:</p>
       
-    </div>
+      </div>
     
    
-   {{> EasySearch.Input index=index attributes=inputAttributes }}
+     {{> EasySearch.Input index=index attributes=inputAttributes }}
 
-   {{#EasySearch.IfInputEmpty index=index }}
-   {{else}}
-     {{#if resultsCount}}
-       <div class="padded count-results">{{resultsCount}} results found.</div>
-     {{/if}}
-   {{/EasySearch.IfInputEmpty}}
+     {{#EasySearch.IfInputEmpty index=index }}
+     {{else}}
+       {{#if resultsCount}}
+         <div class="padded count-results">{{resultsCount}} results found.</div>
+       {{/if}}
+     {{/EasySearch.IfInputEmpty}}
 
 
-   {{#EasySearch.IfSearching index=index }}
-     <div>Searching</div>
-   {{/EasySearch.IfSearching }}
+     {{#EasySearch.IfSearching index=index }}
+       <div>Searching</div>
+     {{/EasySearch.IfSearching }}
 
-     {{#EasySearch.Each index=index }}
-       {{> schoolCard}}
-     {{/EasySearch.Each}}
-
-   {{#EasySearch.IfNoResults index=index }}
-     <div class="padded no-results">No results found</div>
-
-   {{/EasySearch.IfNoResults }}
-
-   {{> EasySearch.Pagination index=index maxPages=10 }}
-   {{! > EasySearch.LoadMore index=index }}
-
-   {{#if showMore}}
-     {{> EasySearch.Input name="mini-index" index=index attributes=inputAttributes }}
-
-     <ul>
-       {{#EasySearch.Each name="mini-index" index=index }}
-         <li>{{schoolName}}</li>
+       {{#EasySearch.Each index=index }}
+         {{> schoolCard}}
        {{/EasySearch.Each}}
-     </ul>
-   {{/if}}
 
-    
+     {{#EasySearch.IfNoResults index=index }}
+       <div class="padded no-results">No results found</div>
 
-     <div class="deptDocs">
+     {{/EasySearch.IfNoResults }}
+
+     {{> EasySearch.Pagination index=index maxPages=10 }}
+     {{! > EasySearch.LoadMore index=index }}
+
+     {{#if showMore}}
+       {{> EasySearch.Input name="mini-index" index=index attributes=inputAttributes }}
+
+       <ul>
+         {{#EasySearch.Each name="mini-index" index=index }}
+           <li>{{schoolName}}</li>
+         {{/EasySearch.Each}}
+       </ul>
+     {{/if}}
+
+    <div class="row center-align">
+       <div class="divider"> </div>
+    </div>
+
+       <div class="row deptDocs">
   
-        <a href="/about">Click here to see the original government data </a>
-    
-     
+          <a href="/about" class="btn white-text">Click here to see the original government data </a>
+      
+      </div>
+      
+      <div class="row">
+         <div class="divider"> </div>
+      </div>
       
     </div>
         
@@ -149,6 +188,7 @@
 
 
 <template name="ECPlan">
+  <p>Your school is in the Eastern Cape Norms and Standards Implementation Plan</p>
         <ul>
             <li> School: <span class="yellow-text text-accent-4">{{schoolName}}  </span></li>
             <li> District: <span class="yellow-text text-accent-4">{{districtName}}  </span></li>
@@ -173,7 +213,7 @@
 <template name="ASIDI">
   
    <div class="row">
-     <p>Your school is also in the <a href="http://www.education.gov.za/Home/ASIDI/tabid/613/Default.aspx">Accelerated Schools Infrastructure Delivery Initiative (ASIDI)</a> list. ASIDI is also a national programme, the that is helping to build new schools in the province. This is separate from the Provincial plans.
+     <p>Your school is in the <a href="http://www.education.gov.za/Home/ASIDI/tabid/613/Default.aspx">Accelerated Schools Infrastructure Delivery Initiative (ASIDI)</a> list. ASIDI is a national programme that is helping to build new schools in the province. This is separate from the Provincial plans.
      </p>
    
   <h4>ASIDI Master List</h4>
