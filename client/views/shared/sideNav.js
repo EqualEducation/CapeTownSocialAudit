@@ -29,45 +29,53 @@ Template.form.events({
     event.preventDefault();
   },
   'click .save_formbs' : function(event, template) {
-    event.preventDefault();
-    var numberOfFormBsToAdd = template.find('#numberOfFormBs').value;
-    var audit = this.audit;
-    var totalNumberOfForms = audit.forms.length
+      event.preventDefault();
+      var numberOfFormBsToAdd = template.find('#numberOfFormBs').value;
+      var audit = this.audit;
+      var totalNumberOfForms = audit.forms.length
 
-    //get the biggest form B index
-    var highestIndex = -1;
-    audit.forms.forEach(function(form) {
-      if (form.name.indexOf("formB") > -1 && form.index > highestIndex) {
-        highestIndex = form.index;
-      }
-    })
+      //get the biggest form index
+      var highestIndex = -1;
+      var totalNumberOfFormBs = 0;
 
-    for(i=0; i<numberOfFormBsToAdd; i++) {
-      var formToAdd = JSON.parse(JSON.stringify(formB));
-      var currentFormIndex = highestIndex + 1 + i;
-      formToAdd.index = currentFormIndex;
-      formToAdd.name = formToAdd.name.replace('formB', 'formB' + currentFormIndex)
-      var display_index = currentFormIndex + 1;
-      formToAdd.display_name = formToAdd.display_name.replace('Form B', 'Form B.' + display_index)
-      formToAdd.sections.forEach(function(section) {
-        section.name = section.name.replace('formB', 'formB' + currentFormIndex)
-        section.sub_sections.forEach(function(subsection) {
-          subsection.name = subsection.name.replace('formB', 'formB' + currentFormIndex)
-        })
+      audit.forms.forEach(function(form) {
+        if (form.index > highestIndex) {
+          highestIndex = form.index;
+        }
+
+        if (form.name.indexOf("formB") > -1) {
+          totalNumberOfFormBs++;
+        }
       })
 
-      audit.forms.push(formToAdd);
-    }
-    var update = Audits.update({'_id': audit._id}, {$set: {'forms': audit.forms} });
-    if (update) {
-      Session.set('formsCount', audit.forms.length);
-    }
+      for(i=0; i<numberOfFormBsToAdd; i++) {
+        var formToAdd = JSON.parse(JSON.stringify(formB));
+        var currentFormIndex = highestIndex + 1 + i;
+        console.log('New form Index: ' + currentFormIndex)
+        formToAdd.index = currentFormIndex;
+        formToAdd.name = formToAdd.name.replace('formB', 'formB' + currentFormIndex)
+        var display_index = totalNumberOfFormBs + i + 1;
+        console.log('New form display Index: ' + display_index)
+        formToAdd.display_name = formToAdd.display_name.replace('Form B', 'Form B.' + display_index)
+        formToAdd.sections.forEach(function(section) {
+          section.name = section.name.replace('formB', 'formB' + currentFormIndex)
+          section.sub_sections.forEach(function(subsection) {
+            subsection.name = subsection.name.replace('formB', 'formB' + currentFormIndex)
+          })
+        })
 
-    template.find('#addForms').reset();
-    $('.collapsible').collapsible({
-      accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
-    });
-  },
+        audit.forms.push(formToAdd);
+      }
+      var update = Audits.update({'_id': audit._id}, {$set: {'forms': audit.forms} });
+      if (update) {
+        Session.set('formsCount', audit.forms.length);
+      }
+
+      template.find('#addForms').reset();
+      $('.collapsible').collapsible({
+        accordion : true // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+      });
+    },
   'keypress .number' : function(evt){
       var theEvent = evt;
       var key = theEvent.keyCode || theEvent.which;
@@ -100,8 +108,12 @@ Template.form.events({
     },
   'click .changeIndex' : function(e, t) {
     var str = this.name;
+    console.log('CHANGE INDEX')
+    console.log('str: ' + str);
     var names = str.split(".");
     var audit = t.data.audit;
+    console.log('name: ' + names[0]);
+
     var form = audit.forms.filter(function( form ) {
       return form.name == names[0];
     });
@@ -112,6 +124,12 @@ Template.form.events({
 
     var subsectionIndex = this.index;
 
+    console.log('FORM: ');
+    console.log(form)
+    console.log('SECTION: ');
+    console.log(section)
+    console.log('SUBSECTION: ');
+    console.log(subsectionIndex)
     Session.set('formIndex', form[0].index);
     Session.set('sectionIndex', section[0].index);
     Session.set('subsectionIndex', subsectionIndex);
@@ -152,4 +170,26 @@ Template.registerHelper('shouldShow', function(hasChanges, isComplete) {
   if (!isComplete && hasChanges) {
     return 'warning';
   }
+});
+
+Template.registerHelper('isLastForm', function(formToCheck, audit) {
+  console.log('IS LAST FORM')
+  //find last index
+  var highestIndex = -1;
+  audit.forms.forEach(function(form) {
+
+    if (form.index > highestIndex) {
+      highestIndex = form.index
+    }
+  })
+
+  var isLastForm = false;
+  if (highestIndex === formToCheck.index) {
+    isLastForm = true;
+  }
+
+  console.log('FORM INDEX:' + formToCheck.index)
+  console.log('HIGHEST INDEX:' + highestIndex)
+  return isLastForm;
+
 });

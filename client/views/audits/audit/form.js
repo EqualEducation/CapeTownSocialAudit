@@ -5,6 +5,8 @@ forms = function() {
 
 Template.form.helpers({
   'currentContext' : function() {
+    console.log('FormIndex: ' + formIndex);
+
     var formIndex = Session.get('formIndex');
     if (formIndex == undefined) {
       Session.set('formIndex', 0);
@@ -14,6 +16,9 @@ Template.form.helpers({
     formIndex = Session.get('formIndex');
     var sectionIndex = Session.get('sectionIndex');
     var subsectionIndex = Session.get('subsectionIndex');
+
+    console.log('SectionIndex: ' + sectionIndex);
+    console.log('SubSectionIndex: ' + subsectionIndex);
 
     var audit = this.audit;
     var ret = new Object();
