@@ -2,8 +2,7 @@ Template.dynamicTable.events({
   'click .delete' : function(event, template) {
     var subsection = template.data.subsection;
 
-    subsection.objects.pop(this)
-    // subsection.pop(this);
+    subsection.objects.splice(event.target.getAttribute('id'), 1);
 
     var audit = Audits.findOne({_id: Router.current().params._id, 'user.id' : Meteor.userId()})
 

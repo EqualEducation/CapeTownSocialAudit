@@ -173,7 +173,6 @@ Template.registerHelper('shouldShow', function(hasChanges, isComplete) {
 });
 
 Template.registerHelper('isLastForm', function(formToCheck, audit) {
-  console.log('IS LAST FORM')
   //find last index
   var highestIndex = -1;
   audit.forms.forEach(function(form) {

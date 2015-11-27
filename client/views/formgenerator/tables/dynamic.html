@@ -30,6 +30,7 @@
 
         <thead>
           <tr>
+            <th></th>
             {{#each subsection.columns}}
               <th data-field="{{this.ID}}">{{this.label}}</th>
             {{/each}}
@@ -42,7 +43,7 @@
             {{#each this}}
               <td>{{this.values.[0]}}</td>
             {{/each}}
-            <td><a class="delete">Delete</a></td>
+            <td><a id="{{@index}}" class="delete">Delete</a></td>
           </tr>
         {{/each}}
       </tbody>
