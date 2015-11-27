@@ -49,7 +49,7 @@
       <div class="col s6 center-align">
       
         <a class="btn-large btn-homepage">What infrastructure does your school need?</a>
-      {{>mkaudit}}
+      {{>auditForm}}
       
       </div>
       
@@ -97,7 +97,7 @@
   </div>
 </template>
 
-<template name='mkaudit'>
+<template name='auditForm'>
     <h5>Fill out this form to let us know what your school needs!</h5>
    <iframe src="https://docs.google.com/forms/d/1gbVFUmRDfXfMvhwOcPuvl4fIwzvwMUOvPRNpn0Z5h5I/viewform?embedded=true" width="400" height="820" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
         
@@ -129,7 +129,7 @@
      {{/EasySearch.IfSearching }}
 
        {{#EasySearch.Each index=index }}
-         {{> schoolCard}}
+         {{> schoolResult}}
        {{/EasySearch.Each}}
 
      {{#EasySearch.IfNoResults index=index }}
@@ -171,9 +171,9 @@
 </template> 
 
 
-<template name="schoolCard">
+<template name="schoolResult">
 
-  <div class="schoolCard">
+  <div class="schoolResult">
 
       {{> ECPlan}}
       
