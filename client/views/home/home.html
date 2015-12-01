@@ -7,8 +7,8 @@
         <div class="col s12">
           <p>On Novemer 29th, 2013, The Minister of Basic Education passed legally binding Norms and Standards for School Infrastructure. For the first time, law says what makes a school a school. </p>
           <p>The Norms and Standards requires every province to release implementation plans according to the following timeframes:</p>
+        </div>
       </div>
-
     </div>
     
     <div class="row timeline">
@@ -33,22 +33,20 @@
            <p>All of the Norms and Standards must be implemented in full, including halls, sports fields, walkways, parking lots, and more.</p>
         </div>
       
-      </div>
+    </div>
     
     <div class="row searchAndAudit">
       <div class="col s6 searchColumn">
         
-        {{>searchSchools}}
+        {{> schoolSearch}}
       
         <div class="divider"> </div>
 
         <div class="row deptDocs">
           <a href="/about#govData" class="btn white-text">See the original government data sources </a>
-        </div>
+        </div>    
       
-      
-      </div>
-      
+      </div>      
 
       <div class="col s6 auditColumn center-align">
       
@@ -56,8 +54,6 @@
       {{>auditForm}}
       
       </div>
-      
-    
     
     </div>
     
@@ -103,7 +99,7 @@
         
 </template> 
 
-<template name='searchSchools'>
+<template name='schoolSearch'>
         <div class="row">
           <a class="btn-tworows btn-large btn-homepage">What has ECDoE promised your school?</a>
         </div>

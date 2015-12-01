@@ -3,7 +3,7 @@
 }
 */ 
 
-Template.searchSchools.helpers({
+Template.schoolSearch.helpers({
 
   
   inputAttributes: function () {
