@@ -1,4 +1,9 @@
-Template.schoolSearch.helpers({
+/*if (Meteor.isClient) {
+  Meteor.subscribe("ecschools");
+}
+*/ 
+
+Template.home.helpers({
 
   
   inputAttributes: function () {
@@ -7,7 +12,7 @@ Template.schoolSearch.helpers({
   ecschools: function () {
     return ECSchools.find({}, { sort: { schoolName: -1 } });
   },
-  index: function () {
+  ECSchoolsIndex: function () {
     return ECSchoolsIndex;
   },
   resultsCount: function () {
@@ -17,5 +22,6 @@ Template.schoolSearch.helpers({
     return false;
   },
   renderTmpl: () => Template.renderTemplate
+  
 });
 

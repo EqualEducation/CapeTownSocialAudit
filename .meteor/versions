@@ -73,6 +73,8 @@ meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:kadira@2.26.3
 meteorhacks:meteorx@1.4.1
+meteorhacks:picker@1.0.3
+meteorhacks:search-source@1.4.2
 meteortoys:allthings@2.2.0
 meteortoys:authenticate@2.1.0
 meteortoys:autopub@2.1.0
