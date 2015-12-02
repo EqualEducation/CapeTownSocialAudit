@@ -4,7 +4,7 @@ accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
 alanning:roles@1.2.14
 anti:i18n@0.4.3
-aslagle:reactive-table@0.8.20
+aslagle:reactive-table@0.8.21
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
@@ -75,15 +75,15 @@ meteorhacks:kadira@2.26.3
 meteorhacks:meteorx@1.4.1
 meteorhacks:picker@1.0.3
 meteorhacks:search-source@1.4.2
-meteortoys:allthings@2.2.0
+meteortoys:allthings@2.3.0
 meteortoys:authenticate@2.1.0
 meteortoys:autopub@2.1.0
 meteortoys:blueprint@2.1.0
 meteortoys:email@2.1.0
 meteortoys:hotreload@2.1.0
 meteortoys:listen@2.1.0
-meteortoys:method@2.2.1
-meteortoys:pub@2.1.0
+meteortoys:method@3.0.0
+meteortoys:pub@3.0.0
 meteortoys:result@2.1.0
 meteortoys:shell@2.1.0
 meteortoys:status@2.1.0
@@ -101,7 +101,7 @@ mrt:flash-messages@1.0.1
 mrt:jquery-csv@0.7.1
 mrt:jquery-ui@1.9.2
 msavin:jetsetter@1.5.2
-msavin:mongol@1.6.1
+msavin:mongol@1.6.2
 multiply:iron-router-progress@1.0.2
 npm-bcrypt@0.7.8_2
 npm-mongo@1.4.39_1
