@@ -4,7 +4,7 @@ Template.schoolSearch.helpers({
   inputAttributes: function () {
     return { 'class': 'easy-search-input', 'placeholder': 'Example: Mandela Primary' };
   },
-  ecschools: function () {
+  ecshools: function () {
     return ECSchools.find({}, { sort: { schoolName: -1 } });
   },
   ECSchoolsIndex: function () {
