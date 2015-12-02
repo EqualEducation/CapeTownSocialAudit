@@ -20,3 +20,14 @@ Template.schoolSearch.helpers({
   
 });
 
+/*
+Template.schoolResult.helpers({
+  inEC: function () {
+   
+  }
+  
+  inASIDI: function () {
+    
+  }
+});
+*/

@@ -165,30 +165,37 @@
 
 
 <template name="ECImpPlan">
-  <p>Your school is in the Eastern Cape Norms and Standards Implementation Plan</p>
-        <ul>
-            <li> School: <span class="yellow-text text-accent-4">{{schoolName}}  </span></li>
-            <li> District: <span class="yellow-text text-accent-4">{{districtName}}  </span></li>
-            <li> Implementing agent: <span class="yellow-text text-accent-4">{{agent}}  </span></li>
-            <li> Programme: <span class="yellow-text text-accent-4">{{programme}} </span> </li>
-            <li> Funding: <span class="yellow-text text-accent-4">{{source}} </span> </li>
-            <li> Strategic Priority: <span class="yellow-text text-accent-4">{{strategic}}  </span></li>
-            <li> Bidding Status: <span class="yellow-text text-accent-4">{{bid}} </span> </li>
-            <li> Parent Priority: <span class="yellow-text text-accent-4">{{parent}} </span> </li>
-            <li> Description: <span class="yellow-text text-accent-4">{{description}}</span></li>
-            <li> Nature of Investment: <span class="yellow-text text-accent-4">{{nature}}  </span></li>
-            <li> Stage: <span class="yellow-text text-accent-4">{{projectStage}}  </span></li>
-            <li> Start date: <span class="yellow-text text-accent-4">{{startDate}} </span> </li>
-            <li> End date: <span class="yellow-text text-accent-4">{{endDate}}</span>  </li>
-            <li> Total cost: <span class="yellow-text text-accent-4">{{totalCost}}  </span></li>
-            <li> Comments: <span class="yellow-text text-accent-4">{{ecplanComments}} </span></li>
-      </ul>
+  {{#if inEC}}
+    <p>Your school is in the Eastern Cape Norms and Standards Implementation Plan</p>
+          <ul>
+              <li> School: <span class="yellow-text text-accent-4">{{schoolName}}  </span></li>
+              <li> District: <span class="yellow-text text-accent-4">{{districtName}}  </span></li>
+              <li> Implementing agent: <span class="yellow-text text-accent-4">{{agent}}  </span></li>
+              <li> Programme: <span class="yellow-text text-accent-4">{{programme}} </span> </li>
+              <li> Funding: <span class="yellow-text text-accent-4">{{source}} </span> </li>
+              <li> Strategic Priority: <span class="yellow-text text-accent-4">{{strategic}}  </span></li>
+              <li> Bidding Status: <span class="yellow-text text-accent-4">{{bid}} </span> </li>
+              <li> Parent Priority: <span class="yellow-text text-accent-4">{{parent}} </span> </li>
+              <li> Description: <span class="yellow-text text-accent-4">{{description}}</span></li>
+              <li> Nature of Investment: <span class="yellow-text text-accent-4">{{nature}}  </span></li>
+              <li> Stage: <span class="yellow-text text-accent-4">{{projectStage}}  </span></li>
+              <li> Start date: <span class="yellow-text text-accent-4">{{startDate}} </span> </li>
+              <li> End date: <span class="yellow-text text-accent-4">{{endDate}}</span>  </li>
+              <li> Total cost: <span class="yellow-text text-accent-4">{{totalCost}}  </span></li>
+              <li> Comments: <span class="yellow-text text-accent-4">{{ecplanComments}} </span></li>
+        </ul>
+        
+    {{else}}
+    
+      <p>Your school is not in the Eastern Cape Infrastructure plans</p>
       
+   {{/if}}
 
 </template>
 
 <template name="ASIDIMaster">
   
+  {{#if inASIDI}}
    <div class="row">
      <p>Your school is in the <a href="http://www.education.gov.za/Home/ASIDI/tabid/613/Default.aspx">Accelerated Schools Infrastructure Delivery Initiative (ASIDI)</a> list. ASIDI is a national programme that is helping to build new schools in the province. This is separate from the Provincial plans.
      </p>
@@ -204,6 +211,8 @@
     
    </ul>
  </div>
+ 
+{{/if}}
        
 </template>
 
