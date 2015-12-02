@@ -1,8 +1,3 @@
-/*if (Meteor.isClient) {
-  Meteor.subscribe("ecschools");
-}
-*/ 
-
 Template.schoolSearch.helpers({
 
   
