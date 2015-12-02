@@ -31,3 +31,7 @@ Template.schoolResult.helpers({
   }
 });
 */
+
+Template.schoolResult.rendered = function () {
+  $('.collapsible').collapsible();
+};

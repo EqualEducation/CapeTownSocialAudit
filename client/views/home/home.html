@@ -36,7 +36,7 @@
     </div>
     
     <div class="row searchAndAudit">
-      <div class="col col s12 m6 l6 searchColumn">
+      <div class="col s12 m6 l6 searchColumn">
         
         {{> schoolSearch}}
       
@@ -48,7 +48,7 @@
       
       </div>      
 
-      <div class="col col s12 m6 l6 auditColumn center-align">
+      <div class="col s12 m6 l6 auditColumn center-align">
       
         <a class="btn-large btn-homepage">What infrastructure does your school need?</a>
       {{>auditForm}}
@@ -151,13 +151,40 @@
 
 <template name='schoolResult'>
   <div class="schoolResult">
-
-      {{> ECImpPlan}}
-      
-      <div class="divider">
-      </div>
-      
-      {{> ASIDIMaster}}
+    
+    
+    <ul class="collapsible" data-collapsible="accordion">
+        <li>
+          <div class="collapsible-header">{{schoolName}}</div>
+          
+          
+            <div class="collapsible-body">
+            
+          {{#if inEC}}
+            
+                {{> ECImpPlan}}
+             
+              
+            {{else}}
+            
+            <p>Your school is not in the Eastern Cape's Infrastructure Plans</p>
+            
+          {{/if}}
+            
+            
+          {{#if inASIDI}}
+            <div class="divider"></div>          
+            <p>
+              {{> ASIDIMaster}}
+            </p>
+            
+            {{/if}}
+            
+            
+          </div>
+        </li>
+    </ul>
+    
 
   </div>
   
@@ -165,54 +192,45 @@
 
 
 <template name="ECImpPlan">
-  {{#if inEC}}
+  
+  <div class="row">
+    <div class="col s12">
     <p>Your school is in the Eastern Cape Norms and Standards Implementation Plan</p>
+    <div class="divider col s6 offset-s3"></div>
           <ul>
-              <li> School: <span class="yellow-text text-accent-4">{{schoolName}}  </span></li>
-              <li> District: <span class="yellow-text text-accent-4">{{districtName}}  </span></li>
-              <li> Implementing agent: <span class="yellow-text text-accent-4">{{agent}}  </span></li>
-              <li> Programme: <span class="yellow-text text-accent-4">{{programme}} </span> </li>
-              <li> Funding: <span class="yellow-text text-accent-4">{{source}} </span> </li>
-              <li> Strategic Priority: <span class="yellow-text text-accent-4">{{strategic}}  </span></li>
-              <li> Bidding Status: <span class="yellow-text text-accent-4">{{bid}} </span> </li>
-              <li> Parent Priority: <span class="yellow-text text-accent-4">{{parent}} </span> </li>
-              <li> Description: <span class="yellow-text text-accent-4">{{description}}</span></li>
-              <li> Nature of Investment: <span class="yellow-text text-accent-4">{{nature}}  </span></li>
-              <li> Stage: <span class="yellow-text text-accent-4">{{projectStage}}  </span></li>
-              <li> Start date: <span class="yellow-text text-accent-4">{{startDate}} </span> </li>
-              <li> End date: <span class="yellow-text text-accent-4">{{endDate}}</span>  </li>
-              <li> Total cost: <span class="yellow-text text-accent-4">{{totalCost}}  </span></li>
-              <li> Comments: <span class="yellow-text text-accent-4">{{ecplanComments}} </span></li>
+              <li> District: {{districtName}}  </span></li>
+              <li> Implementing agent: {{agent}}  </span></li>
+              <li> Programme: {{programme}} </span> </li>
+              <li> Funding: {{source}} </span> </li>
+              <li> Strategic Priority: {{strategic}}  </span></li>
+              <li> Bidding Status: {{bid}} </span> </li>
+              <li> Parent Priority: {{parent}} </span> </li>
+              <li> Description: {{description}}</span></li>
+              <li> Nature of Investment: {{nature}}  </span></li>
+              <li> Stage: {{projectStage}}  </span></li>
+              <li> Start date: {{startDate}} </span> </li>
+              <li> End date: {{endDate}}</span>  </li>
+              <li> Total cost: {{totalCost}}  </span></li>
+              <li> Comments: {{ecplanComments}} </span></li>
         </ul>
+      </div>
         
-    {{else}}
-    
-      <p>Your school is not in the Eastern Cape Infrastructure plans</p>
-      
-   {{/if}}
+ </div>
 
 </template>
 
 <template name="ASIDIMaster">
   
-  {{#if inASIDI}}
    <div class="row">
      <p>Your school is in the <a href="http://www.education.gov.za/Home/ASIDI/tabid/613/Default.aspx">Accelerated Schools Infrastructure Delivery Initiative (ASIDI)</a> list. ASIDI is a national programme that is helping to build new schools in the province. This is separate from the Provincial plans.
      </p>
-   
-  <h4>ASIDI Master List</h4>
-  
+     
      <ul>
-
        <li> Financial Year: {{asidiYear}}  </li>
        <li> Status: {{asidiStatus}}  </li>
        <li> Comments: {{asidiCommentsA}}  {{asidiCommentsB}}</li>
-
-    
    </ul>
  </div>
- 
-{{/if}}
        
 </template>
 
