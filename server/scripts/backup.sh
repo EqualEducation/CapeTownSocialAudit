@@ -10,7 +10,7 @@ env=$1
 if [ $env != "local" ]; then
 	echo "";
 else
-	echo "local"
+  echo "*** BACKING UP LOCAL ***";
 	host=127.0.0.1:3001
 	mongo_db=meteor
 	user="ee"
@@ -20,7 +20,7 @@ fi;
 if [ $env != "staging" ]; then
 	echo "";
 else
-	echo "staging"
+  echo "*** BACKING UP STAGING ***";
 	host=production-db-a2.meteor.io:27017
 	mongo_db=test_wcaudit_equaleducation_org_za
 	user="ee"
@@ -30,8 +30,8 @@ fi;
 if [ $env != "production" ]; then
 	echo "";
 else
-	echo "production";
-  host=production-db-a3.meteor.io:27017
+	echo "*** BACKING UP PRODUCTION ***";
+  host=production-db-a1.meteor.io:27017
   # production-db-a3.meteor.io:2701
 	mongo_db=wc_audit_equaleducation_org_za
 	user="ee"

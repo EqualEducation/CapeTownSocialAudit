@@ -22,9 +22,11 @@ if [ $env != "staging" ]; then
 	echo "";
 else
 	echo "staging"
-	host=production-db-a2.meteor.io
+  host=ec2-52-35-117-227.us-west-2.compute.amazonaws.com
+  mongo_db=wcaudit
+	# host=production-db-a2.meteor.io
   port=27017
-	mongo_db=test_wcaudit_equaleducation_org_za
+	# mongo_db=test_wcaudit_equaleducation_org_za
 	user="ee"
 	pass="ee"
 fi;
