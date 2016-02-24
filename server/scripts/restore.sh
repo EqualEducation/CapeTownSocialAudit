@@ -42,7 +42,7 @@ fi;
 # fi;
 
 
-mongorestore -h $host --port $port -d $mongo_db -u $user -p $pass dump/wc_audit_equaleducation_org_za
+mongorestore -h $host --port $port -d $mongo_db -u $user -p $pass dump/wcaudit
 
 
 # mongoimport -h $host -d $mongo_db -c videos -u $user -p $pass --file videos.json --jsonArray

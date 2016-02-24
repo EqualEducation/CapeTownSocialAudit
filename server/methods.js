@@ -187,6 +187,7 @@ Meteor.methods({
                           if (detail.values[0] != undefined) {
                             var val = detail.values[0];
                             val = val.replace(/,/g, "; ")
+                            val = val.replace(/\n/g, ".")
                             block[detail.id] = val;
                           } else {
                             block[detail.id] = "";
