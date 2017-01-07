@@ -83,7 +83,7 @@ var grades = {
               id: 'difference',
               name: 'Difference',
               index: 5,
-              type: 'number'
+              type: 'difference'
             },
   ],
   rows:
@@ -205,7 +205,7 @@ var staff = {
               id: 'difference',
               name: 'Difference',
               index: 5,
-              type: 'number'
+              type: 'difference'
             },
   ],
   rows:

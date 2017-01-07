@@ -14,8 +14,8 @@
             <div class="collapsible-header active" id="{{this.name}}">{{this.display_name}}</div>
             <div class="collapsible-body">
               <ul class="collection">
-                {{#if stringContainsString this.name 'formB'}}
-                  <li><a class='btn collection-item truncate deleteForm' id={{this.name}}>DELETE FORM {{this.index}}</a></li>
+                {{#if isLastForm this ../audit}}
+                  <li><a class='btn collection-item truncate deleteForm' id={{this.name}}>DELETE FORM</a></li>
                 {{/if}}
                 {{#each this.sections}}
                     {{#each this.sub_sections}}
