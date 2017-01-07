@@ -127,13 +127,13 @@
                {{> schoolResult}}
              {{/EasySearch.Each}} -->
 
-           {{#EasySearch.IfNoResults index=ECSchoolsIndex }}
+           <!-- {{#EasySearch.IfNoResults index=ECSchoolsIndex }}
              <div class="padded no-results">No results found. Please try typing your school name again.</div>
 
-           {{/EasySearch.IfNoResults }}
+           {{/EasySearch.IfNoResults }} -->
 
-           {{> EasySearch.Pagination index=ECSchoolsIndex maxPages=10 }}
-           {{! > EasySearch.LoadMore index=ECSchoolsIndex }}
+           <!-- {{> EasySearch.Pagination index=ECSchoolsIndex maxPages=10 }}
+           {{! > EasySearch.LoadMore index=ECSchoolsIndex }} -->
 
            {{#if showMore}}
              {{> EasySearch.Input name="mini-index" index=ECSchoolsIndex attributes=inputAttributes }}
