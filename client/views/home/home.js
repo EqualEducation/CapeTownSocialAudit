@@ -1,6 +1,6 @@
 Template.schoolSearch.helpers({
 
-  
+
   inputAttributes: function () {
     return { 'class': 'easy-search-input', 'placeholder': 'Example: Mandela Primary' };
   },
@@ -8,7 +8,7 @@ Template.schoolSearch.helpers({
     return ECSchools.find({}, { sort: { schoolName: -1 } });
   },
   ECSchoolsIndex: function () {
-    return ECSchoolsIndex;
+    return [ECSchoolsIndex];
   },
   resultsCount: function () {
     return ECSchoolsIndex.getComponentDict().get('count');
@@ -17,17 +17,17 @@ Template.schoolSearch.helpers({
     return false;
   },
   renderTmpl: () => Template.renderTemplate
-  
+
 });
 
 /*
 Template.schoolResult.helpers({
   inEC: function () {
-   
+
   }
-  
+
   inASIDI: function () {
-    
+
   }
 });
 */
