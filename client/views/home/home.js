@@ -7,8 +7,8 @@ Template.schoolSearch.helpers({
   ecshools: function () {
     return ECSchools.find({}, { sort: { schoolName: -1 } });
   },
-  ECSchoolsIndex: function () {
-    return [ECSchoolsIndex];
+  schoolsIndex: function () {
+    return ECSchoolsIndex;
   },
   resultsCount: function () {
     return ECSchoolsIndex.getComponentDict().get('count');
