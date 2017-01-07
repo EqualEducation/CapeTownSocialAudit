@@ -16,14 +16,13 @@ ECSchoolsIndex = new EasySearch.Index({
 
 Template.schoolSearch.helpers({
 
-
   inputAttributes: function () {
     return { 'class': 'easy-search-input', 'placeholder': 'Example: Mandela Primary' };
   },
   ecshools: function () {
     return ECSchools.find({}, { sort: { schoolName: -1 } });
   },
-  schoolsIndex: function () {
+  schools_index: function () {
     return ECSchoolsIndex;
   },
   resultsCount: function () {
