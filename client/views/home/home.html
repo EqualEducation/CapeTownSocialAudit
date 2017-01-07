@@ -107,7 +107,7 @@
          <div class="row introSearch">
            <h5>Type your school name here:</h5>
          </div>
-         <!--
+
           {{> EasySearch.Input index=ECSchoolsIndex attributes=inputAttributes }}
 
            {{#EasySearch.IfInputEmpty index=ECSchoolsIndex }}
@@ -123,9 +123,9 @@
              <div>Searching...</div>
            {{/EasySearch.IfSearching }}
 
-             {{#EasySearch.Each index=ECSchoolsIndex }}
+             <!-- {{#EasySearch.Each index=ECSchoolsIndex }}
                {{> schoolResult}}
-             {{/EasySearch.Each}}
+             {{/EasySearch.Each}} -->
 
            {{#EasySearch.IfNoResults index=ECSchoolsIndex }}
              <div class="padded no-results">No results found. Please try typing your school name again.</div>
@@ -139,11 +139,11 @@
              {{> EasySearch.Input name="mini-index" index=ECSchoolsIndex attributes=inputAttributes }}
 
              <ul>
-               {{#EasySearch.Each name="mini-index" index=ECSchoolsIndex }}
+               <!-- {{#EasySearch.Each name="mini-index" index=ECSchoolsIndex }}
                  <li>test{{schoolName}}</li>
-               {{/EasySearch.Each}}
+               {{/EasySearch.Each}} -->
              </ul>
-           {{/if}}          -->
+           {{/if}}
 
 </template>
 
