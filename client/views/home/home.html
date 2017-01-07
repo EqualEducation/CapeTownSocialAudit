@@ -1,7 +1,7 @@
 <template name='home'>
   <div class="container">
     <h4 class="center-align">The Michael Komape Campaign for School Infrastructure</h4>
-    
+
     <div class="section normsIntro">
       <div class="row">
         <div class="col s12">
@@ -10,7 +10,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row timeline">
         <div class="col s12 m3 l3 center-align">
           <h4>2016</h4>
@@ -32,45 +32,45 @@
            <img src="icons/school.png">
            <p>All of the Norms and Standards must be implemented in full, including halls, sports fields, walkways, parking lots, and more.</p>
         </div>
-      
+
     </div>
-    
+
     <div class="row searchAndAudit">
       <div class="col s12 m5 l5 searchColumn">
-        
+
         {{> schoolSearch}}
-      
+
         <div class="divider"> </div>
 
         <div class="row deptDocs section center-align">
           <a href="/about#govData" class="btn white-text">See the original government data sources </a>
-        </div>    
-      
-      </div>      
+        </div>
+
+      </div>
 
       <div class="col s12 m7 l7 auditColumn center-align">
-      
+
         <a class="btn-large btn-homepage">What infrastructure does your school need?</a>
       {{>auditForm}}
-      
+
       </div>
-    
+
     </div>
-    
+
     <div class="row bottomPanels">
           <div class="col s12 m6 l6 normsPanel">
             <div class="card blue-grey darken-1">
               <div class="card-content white-text">
                 <span class="card-title">About the Norms and Standards</span>
               <p>The Regulations Relating to Minimum Uniform Norms and Standards for Public School Infrastructure is a law that tells us what infrastructure all public schools must have in order to provide a safe environment and function properly.</p>
-              
+
               </div>
              <div class="card-action">
                <a href="http://www.equaleducation.org.za/campaigns/minimum-norms-and-standards" target="_blank">Read more about the Norms and Standards</a>
              </div>
             </div>
-          </div> 
-        
+          </div>
+
           <div class="col s12 m6 l6 eePanel">
               <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
@@ -79,9 +79,9 @@
                   </div>
 
                   <div class="row center-align"><a href=mailto:joinec@equaleducation.org.za class="btn waves-effect waves-light white-text">Email: joinec@equaleducation.org.za</a></div>
-                  
+
                  <div class="row center-align"> <a href=tel:+27436421616 class="btn waves-effect waves-light white-text" style="margin-bottom:0;">Phone: +27 43 642 1616</a></div>
-                  
+
                 </div>
                 <div class="card-action">
                   <a href="http://www.equaleducation.org.za" target="_blank">Read more about Equal Education</a>
@@ -89,53 +89,53 @@
               </div>
             </div>
     </div>
-          
+
   </div>
 </template>
 
 <template name='auditForm'>
 
    <iframe src="https://docs.google.com/forms/d/1gbVFUmRDfXfMvhwOcPuvl4fIwzvwMUOvPRNpn0Z5h5I/viewform?embedded=true" width="500" height="820" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-        
-</template> 
+
+</template>
 
 <template name='schoolSearch'>
         <div class="row">
           <a class="btn-tworows btn-large btn-homepage">What has ECDoE promised your school?</a>
         </div>
-        
-         <div class="row introSearch">      
+
+         <div class="row introSearch">
            <h5>Type your school name here:</h5>
          </div>
-         
-          {{> EasySearch.Input index=ECSchoolsIndex attributes=inputAttributes }}
 
-           {{#EasySearch.IfInputEmpty index=ECSchoolsIndex }}
-           
+          <!-- {{> EasySearch.Input index=schools_index}} -->
+
+           <!-- {{#EasySearch.IfInputEmpty index=ECSchoolsIndex }}
+
            {{else}}
              {{#if resultsCount}}
                <div class="padded count-results">{{resultsCount}} results found.</div>
              {{/if}}
-           {{/EasySearch.IfInputEmpty}}
+           {{/EasySearch.IfInputEmpty}} -->
 
 
-           {{#EasySearch.IfSearching index=ECSchoolsIndex }}
+           <!-- {{#EasySearch.IfSearching index=ECSchoolsIndex }}
              <div>Searching...</div>
-           {{/EasySearch.IfSearching }}
+           {{/EasySearch.IfSearching }} -->
 
-             {{#EasySearch.Each index=ECSchoolsIndex }}
+             <!-- {{#EasySearch.Each index=ECSchoolsIndex }}
                {{> schoolResult}}
-             {{/EasySearch.Each}}
+             {{/EasySearch.Each}} -->
 
-           {{#EasySearch.IfNoResults index=ECSchoolsIndex }}
+           <!-- {{#EasySearch.IfNoResults index=ECSchoolsIndex }}
              <div class="padded no-results">No results found. Please try typing your school name again.</div>
 
-           {{/EasySearch.IfNoResults }}
+           {{/EasySearch.IfNoResults }} -->
 
-           {{> EasySearch.Pagination index=ECSchoolsIndex maxPages=10 }}
-           {{! > EasySearch.LoadMore index=ECSchoolsIndex }}
+           <!-- {{> EasySearch.Pagination index=ECSchoolsIndex maxPages=10 }}
+           {{! > EasySearch.LoadMore index=ECSchoolsIndex }} -->
 
-           {{#if showMore}}
+           <!-- {{#if showMore}}
              {{> EasySearch.Input name="mini-index" index=ECSchoolsIndex attributes=inputAttributes }}
 
              <ul>
@@ -143,56 +143,56 @@
                  <li>test{{schoolName}}</li>
                {{/EasySearch.Each}}
              </ul>
-           {{/if}}         
-        
+           {{/if}} -->
+
 </template>
 
 
 
 <template name='schoolResult'>
   <div class="schoolResult">
-    
-    
+
+
     <ul class="collapsible" data-collapsible="accordion">
         <li>
           <div class="collapsible-header">{{schoolName}}</div>
-          
-          
+
+
             <div class="collapsible-body">
-            
+
           {{#if inEC}}
-            
+
                 {{> ECImpPlan}}
-             
-              
+
+
             {{else}}
-            
+
             <p>Your school is not in the Eastern Cape's Infrastructure Plans</p>
-            
+
           {{/if}}
-            
-            
+
+
           {{#if inASIDI}}
-            <div class="divider"></div>          
+            <div class="divider"></div>
             <p>
               {{> ASIDIMaster}}
             </p>
-            
+
             {{/if}}
-            
-            
+
+
           </div>
         </li>
     </ul>
-    
+
 
   </div>
-  
+
 </template>
 
 
 <template name="ECImpPlan">
-  
+
   <div class="row">
     <div class="col s12">
     <p>Your school is in the Eastern Cape Norms and Standards Implementation Plan</p>
@@ -214,24 +214,22 @@
               <li> Comments: {{ecplanComments}} </li>
         </ul>
       </div>
-        
+
  </div>
 
 </template>
 
 <template name="ASIDIMaster">
-  
+
    <div class="row">
      <p>Your school is in the <a href="http://www.education.gov.za/Home/ASIDI/tabid/613/Default.aspx">Accelerated Schools Infrastructure Delivery Initiative (ASIDI)</a> list. ASIDI is a national programme that is helping to build new schools in the province. This is separate from the Provincial plans.
      </p>
-     
+
      <ul>
        <li> Financial Year: {{asidiYear}}  </li>
        <li> Status: {{asidiStatus}}  </li>
        <li> Comments: {{asidiCommentsA}}  {{asidiCommentsB}}</li>
    </ul>
  </div>
-       
+
 </template>
-
-
