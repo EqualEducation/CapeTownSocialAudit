@@ -34,11 +34,11 @@ Template.title.helpers({
       return string1.indexOf(string2) > -1;
   });
 
-  Handlebars.registerHelper('userIsInRole', function(role){
+  Template.registerHelper('userIsInRole', function(role){
     return userIsInRole(role);
   });
 
-  Handlebars.registerHelper('key_value', function(context, options) {
+  Template.registerHelper('key_value', function(context, options) {
   var result = [];
   _.each(context, function(value, key, list){
     result.push({key:key, value:value});

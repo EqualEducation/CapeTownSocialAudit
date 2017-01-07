@@ -146,6 +146,7 @@ video.responsive-video {
     line-height: 30px;
     border-radius: 2px;
     text-align: center;
+    cursor: pointer;
 
     a { color: #444; }
 
@@ -730,7 +731,7 @@ nav ul a span.badge {
 }
 
 .formContainer {
-  margin: 40px;
+  margin: 15px;
   height:80%;
   background-color: white;
   border-radius: 2px;
